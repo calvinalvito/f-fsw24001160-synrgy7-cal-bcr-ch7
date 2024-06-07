@@ -1,7 +1,13 @@
 import React from "react";
-import carImage from "../../assets/images/img_car.png"
+import carImage from "../../assets/images/img_car.png";
+import { useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = ()=>{
+    const navigate = useNavigate();
+
+     const handleButtonClick = () => {
+        navigate('/cari-mobil');  // Ganti '/target-page' dengan rute yang diinginkan
+  };
     return (
         <>
             <section id="hero" className="hero position-relative d-flex align-items-center justify-content-center">
@@ -13,7 +19,9 @@ const Hero: React.FC = ()=>{
                     terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu
                     untuk sewa mobil selama 24 jam.</p>
                     <div>
-                    <button className="button" type="submit">Mulai Sewa Mobil</button>
+                    <button className="button" type="button" onClick={handleButtonClick}>
+                        Mulai Sewa Mobil
+                    </button>
                     </div>
                 </div>
                 <div className="hero__img">
