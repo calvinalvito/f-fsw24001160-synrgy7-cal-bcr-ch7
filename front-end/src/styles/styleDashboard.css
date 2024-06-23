@@ -1,0 +1,109 @@
+:root {
+    --font-size-body: 14px;
+    --font-size-titleCard:16px;
+    --font-size-title: 18px;
+    --font-size-heading2: 24px;
+    --font-size-headingDahboard: 20px;
+    --font-size-heading: 36px;
+  
+    --line-height-body: 1.5;
+    --line-height-title: 1.2;
+    --line-height-heading: 1.2;
+  
+    --font-family-base: 'Helvetica', sans-serif;
+}
+
+.title-font,
+.heading-font,
+.paragraph-font,
+* {
+    font-family: var(--font-family-base);
+}
+
+.title-font {
+    font-weight: bold;
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-title);
+}
+
+.title-dashboard {
+    font-weight: bold;
+    font-size: var(--font-size-headingDahboard);
+    line-height: var(--line-height-title);
+}
+
+.heading-font {
+    font-weight: bold;
+    font-size: var(--font-size-heading);
+    line-height: var(--line-height-heading);
+}
+
+.title-card {
+    font-weight: bold;
+    font-size: var(--font-size-titleCard);
+    line-height: var(--line-height-body);
+}
+
+
+
+.main__menu{
+    background-color:#0D28A6;
+    height: 100vh;
+}
+
+.mainMenu__logo{
+    padding-top:18px;
+    padding-bottom:18px;
+}
+
+.sidebar__header{
+    height: 70px;
+    background-color:#FFFFFF;
+    padding-left: 24px;
+}
+
+.sidebar__content p {
+    padding-left:24px;
+    padding-top:11px;
+    padding-bottom:11px;
+    margin-top:24px;
+}
+
+.sidebar__button{
+    text-align: left;
+    padding-left:24px;
+    background-color:#A4B2F6;
+    border-radius:0;
+}
+
+.delete-confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+  
+  .delete-confirmation-content {
+    background-color: white;
+    padding: 32px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+    z-index: 1100; 
+  }
+  
+  
+  .delete-confirmation-content button {
+    width: 100px;
+    margin-top: 10px;
+  }
+  
+  .info__message{
+    color:#D00C1A;
+  }
