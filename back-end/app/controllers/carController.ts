@@ -3,9 +3,10 @@ import { CarService } from "../services/carsService";
 import { mUpload } from "../../config/multer";
 import cloudinary from "../../config/cloudinary";
 import CarLogService from "../services/carLogsService";
+import Users from "../models/Users";
 
 interface CustomRequest extends Request {
-  user?: any; 
+  user?: Users;
 }
 
 export const getAllCars = async (
@@ -51,9 +52,15 @@ export const deleteCar = async (
   try {
     const { id } = req.params;
     const carId = parseInt(id, 10);
-    console.log(carId);
-    
+
     await CarService.deleteCarById(carId);
+    const userId = req.user?.id;
+    await CarLogService.createLog({
+      activity_type: "delete",
+      user_id: userId,
+      car_id: carId,
+    });
+
     res.json({ message: "Car deleted successfully" });
   } catch (error) {
     console.error("Error deleting car:", error);
@@ -64,7 +71,7 @@ export const deleteCar = async (
 //Create Data Car
 export const createCar = async (req: CustomRequest, res: Response) => {
   try {
-    mUpload.single("picture")(req, res, async (err: any) => {
+    mUpload.single("picture")(req, res, async (err: unknown) => {
       if (err) {
         console.error("Error uploading picture:", err);
         return res
@@ -91,7 +98,7 @@ export const createCar = async (req: CustomRequest, res: Response) => {
           finish_rent,
         });
 
-        const userId = req.user.id;
+        const userId = req.user?.id;
         await CarLogService.createLog({
           activity_type: "create",
           user_id: userId,
@@ -122,7 +129,7 @@ export const createCar = async (req: CustomRequest, res: Response) => {
 //Update Data Car
 export const updateCar = async (req: CustomRequest, res: Response) => {
   try {
-    mUpload.single("picture")(req, res, async (err: any) => {
+    mUpload.single("picture")(req, res, async (err: unknown) => {
       if (err) {
         console.error("Error uploading picture:", err);
         return res
@@ -154,7 +161,7 @@ export const updateCar = async (req: CustomRequest, res: Response) => {
           finish_rent,
         });
 
-        const userId = req.user.id;
+        const userId = req.user?.id;
         await CarLogService.createLog({
           activity_type: "update",
           user_id: userId,

@@ -64,7 +64,7 @@ const CarDashboardContextProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const addCar = async (car: NewCar, pictureFile: File) => {
+  const addCar = async (car: NewCar) => {
     const formData = new FormData();
     formData.append("name", car.name);
     formData.append("price", car.price);

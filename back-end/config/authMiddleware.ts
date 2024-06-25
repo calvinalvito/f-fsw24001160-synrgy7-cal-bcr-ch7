@@ -2,12 +2,20 @@ import bcrypt from "bcryptjs";
 import { Request, Response, NextFunction } from 'express';
 import jwt from "jsonwebtoken";
 import userService from "../app/services/userService";
+import Users from "../app/models/Users";
 
 
 const SALT = 10;
 
+interface JwtPayload {
+    id: number;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 interface CustomRequest extends Request {
-    user?: any; // Sesuaikan tipe dengan struktur user Anda
+    user?: Users;
   }
 
 export async function encryptPassword(password: string): Promise<string> {
@@ -37,7 +45,7 @@ export async function checkPassword(encryptedPassword: string, password: string)
     });
 };
 
-export function createToken(payload: any): string {
+export function createToken(payload: JwtPayload): string {
     return jwt.sign(payload, process.env.JWT_SIGNATURE_KEY || "Rahasia");
 };
 

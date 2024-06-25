@@ -16,19 +16,18 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use('/api', carRoutes);
-app.use('/api',userRoutes);
-app.use('/api',logActivityRoutes);
+app.use('/api', userRoutes);
+app.use('/api', logActivityRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 const db = knex(knexConfig.development);
 
 const checkDatabaseConnection = async () => {
   try {
-    const result = await db.raw('SELECT 1+1 as result');
+    await db.raw('SELECT 1+1 as result');
     console.log('==========Database Connected Successfully==========');
-  } catch (error: any) {
-    console.error('Error Connecting to Database:', error.message);
+  } catch (error: unknown) {
+    console.error('Error Connecting to Database:', (error as Error).message);
   }
 };
 checkDatabaseConnection();

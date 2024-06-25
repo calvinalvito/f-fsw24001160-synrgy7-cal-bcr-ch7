@@ -12,13 +12,18 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     try {
-      await login(email, password); // Panggil fungsi login dari useAuth
+      await login(email, password);
       setMessage("Login Successful");
     } catch (error) {
-      setMessage(error.message || "Login failed");
-      console.error("Error login in:", error);
+      if (error instanceof Error) {
+        setMessage(error.message || "Login failed");
+        console.error("Error logging in:", error);
+      } else {
+        setMessage("Login failed");
+        console.error("Unknown error occurred:", error);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -8,7 +8,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon bin/index.ts",
     "build": "tsc -p .",
-    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "lint": "eslint .",
     "migrate:make": "knex migrate:make",
     "migrate:latest": "knex migrate:latest",
     "seed:make": "knex seed:make",
@@ -36,6 +36,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
@@ -46,9 +47,12 @@
     "@types/pg": "^8.11.6",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/yamljs": "^0.2.34",
+    "eslint": "^9.5.0",
+    "globals": "^15.6.0",
     "knex": "^3.1.0",
     "knex-cli": "^1.0.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.1"
   }
 }

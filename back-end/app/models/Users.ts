@@ -1,6 +1,7 @@
 import { Model } from 'objection';
 import db from '../../db/db';
 
+
 class Users extends Model {
   static get tableName() {
     return 'users';

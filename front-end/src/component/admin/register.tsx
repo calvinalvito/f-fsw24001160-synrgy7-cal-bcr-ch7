@@ -16,8 +16,12 @@ const Register: React.FC = () => {
       setMessage("Registration Successful");
       window.location.href = "/login";
     } catch (error) {
-      setMessage(error.message || "Registration failed");
-      console.error("Error registering:", error);
+      if (error instanceof Error) {
+        setMessage(error.message || "Registration failed");
+        console.error("Error registering:", error);
+      } else {
+        console.error("Unexpected error during registration:", error);
+      }
     }
   };
 

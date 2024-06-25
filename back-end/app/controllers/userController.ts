@@ -5,7 +5,7 @@ import User  from '../models/Users';
 import jwt from "jsonwebtoken";
 
 interface CustomRequest extends Request {
-    user?: any; // Atau gunakan tipe yang sesuai dengan struktur user Anda
+    user?: User;
 }
 
 //Register

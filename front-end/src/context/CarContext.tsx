@@ -59,7 +59,6 @@ export const CarContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   const getRandomDate = () => {
-    const now = new Date();
     const randomMonth = getRandomInt(5, 11);
     const randomDay = getRandomInt(1, 30);
     const randomHour = getRandomInt(0, 23);

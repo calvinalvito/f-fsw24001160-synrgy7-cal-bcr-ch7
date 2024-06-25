@@ -15,9 +15,9 @@ const SidebarDashboard: React.FC = () => {
       try {
         const usersData = await getAllUsers();
         setUsers(usersData);
-        setLoading(false);
       } catch (err) {
         setError("Failed to fetch users");
+      } finally {
         setLoading(false);
       }
     };
@@ -53,13 +53,8 @@ const SidebarDashboard: React.FC = () => {
       <div className="col-9">
         <Header />
 
-        <div
-          className="d-flex flex-row"
-          style={{ marginLeft: "24px", marginTop: "32px" }}
-        >
-          <p className="" style={{ paddingRight: "4px" }}>
-            Dashboard
-          </p>
+        <div className="d-flex flex-row" style={{ marginLeft: "24px", marginTop: "32px" }}>
+          <p className="" style={{ paddingRight: "4px" }}>Dashboard</p>
           <div style={{ paddingRight: "4px" }}>
             <svg
               width="16"
@@ -71,23 +66,20 @@ const SidebarDashboard: React.FC = () => {
               <path
                 d="M6 12L10 8L6 4"
                 stroke="#222222"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
-          <p>Dahboard</p>
+          <p>Dashboard</p>
         </div>
 
         <div className="title-dashboard" style={{ marginLeft: "24px" }}>
           <h3>Dashboard</h3>
         </div>
 
-        <div
-          className="d-flex flex-row"
-          style={{ marginLeft: "24px", marginTop: "24px" }}
-        >
+        <div className="d-flex flex-row" style={{ marginLeft: "24px", marginTop: "24px" }}>
           <svg
             width="4"
             height="24"
@@ -100,76 +92,58 @@ const SidebarDashboard: React.FC = () => {
           <p style={{ paddingLeft: "8px" }}>List Car</p>
         </div>
 
-        <table
-          className="table"
-          style={{ width: "950px", marginLeft: "44px", marginTop: "24px" }}
-        >
-          <thead>
-            <tr>
-              <th scope="col" className="table-secondary">
-                No
-              </th>
-              <th scope="col" className="table-secondary">
-                Name
-              </th>
-              <th scope="col" className="table-secondary">
-                Price
-              </th>
-              <th scope="col" className="table-secondary">
-                Start Rent
-              </th>
-              <th scope="col" className="table-secondary">
-                Finish Rent
-              </th>
-              <th scope="col" className="table-secondary">
-                Picture
-              </th>
-              <th scope="col" className="table-secondary">
-                Created At
-              </th>
-              <th scope="col" className="table-secondary">
-                Updated At
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {cars.length > 0 ? (
-              cars.map((car, index) => (
-                <tr key={car.id}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{car.name}</td>
-                  <td>{car.price}</td>
-                  <td>{new Date(car.start_rent).toLocaleDateString()}</td>
-                  <td>{new Date(car.finish_rent).toLocaleDateString()}</td>
-                  <td>
-                    {car.picture ? (
-                      <img
-                        src={car.picture}
-                        alt={car.name}
-                        style={{ width: "100px", height: "auto" }}
-                      />
-                    ) : (
-                      "No picture"
-                    )}
-                  </td>
-                  <td>{new Date(car.created_at).toLocaleDateString()}</td>
-                  <td>{new Date(car.updated_at).toLocaleDateString()}</td>
-                </tr>
-              ))
-            ) : (
+        {loading ? (
+          <div style={{ marginLeft: "24px", marginTop: "24px" }}>Loading...</div>
+        ) : error ? (
+          <div style={{ marginLeft: "24px", marginTop: "24px" }}>{error}</div>
+        ) : (
+          <table className="table" style={{ width: "950px", marginLeft: "44px", marginTop: "24px" }}>
+            <thead>
               <tr>
-                <td colSpan={8} style={{ textAlign: "center" }}>
-                  No data available
-                </td>
+                <th scope="col" className="table-secondary">No</th>
+                <th scope="col" className="table-secondary">Name</th>
+                <th scope="col" className="table-secondary">Price</th>
+                <th scope="col" className="table-secondary">Start Rent</th>
+                <th scope="col" className="table-secondary">Finish Rent</th>
+                <th scope="col" className="table-secondary">Picture</th>
+                <th scope="col" className="table-secondary">Created At</th>
+                <th scope="col" className="table-secondary">Updated At</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {cars.length > 0 ? (
+                cars.map((car, index) => (
+                  <tr key={car.id}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{car.name}</td>
+                    <td>{car.price}</td>
+                    <td>{new Date(car.start_rent).toLocaleDateString()}</td>
+                    <td>{new Date(car.finish_rent).toLocaleDateString()}</td>
+                    <td>
+                      {car.picture ? (
+                        <img
+                          src={car.picture}
+                          alt={car.name}
+                          style={{ width: "100px", height: "auto" }}
+                        />
+                      ) : (
+                        "No picture"
+                      )}
+                    </td>
+                    <td>{new Date(car.created_at).toLocaleDateString()}</td>
+                    <td>{new Date(car.updated_at).toLocaleDateString()}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={8} style={{ textAlign: "center" }}>No data available</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
 
-        <div
-          className="d-flex flex-row"
-          style={{ marginLeft: "24px", marginTop: "24px" }}
-        >
+        <div className="d-flex flex-row" style={{ marginLeft: "24px", marginTop: "24px" }}>
           <svg
             width="4"
             height="24"
@@ -182,31 +156,20 @@ const SidebarDashboard: React.FC = () => {
           <p style={{ paddingLeft: "8px" }}>List User</p>
         </div>
 
-        {user?.role === "superadmin" ? (
-          <table
-            className="table"
-            style={{ width: "950px", marginLeft: "44px", marginTop: "24px" }}
-          >
+        {loading ? (
+          <div style={{ marginLeft: "24px", marginTop: "24px" }}>Loading...</div>
+        ) : error ? (
+          <div style={{ marginLeft: "24px", marginTop: "24px" }}>{error}</div>
+        ) : user?.role === "superadmin" ? (
+          <table className="table" style={{ width: "950px", marginLeft: "44px", marginTop: "24px" }}>
             <thead>
               <tr>
-                <th scope="col" className="table-secondary">
-                  No
-                </th>
-                <th scope="col" className="table-secondary">
-                  Username
-                </th>
-                <th scope="col" className="table-secondary">
-                  Email
-                </th>
-                <th scope="col" className="table-secondary">
-                  Role
-                </th>
-                <th scope="col" className="table-secondary">
-                  Created At
-                </th>
-                <th scope="col" className="table-secondary">
-                  Updated At
-                </th>
+                <th scope="col" className="table-secondary">No</th>
+                <th scope="col" className="table-secondary">Username</th>
+                <th scope="col" className="table-secondary">Email</th>
+                <th scope="col" className="table-secondary">Role</th>
+                <th scope="col" className="table-secondary">Created At</th>
+                <th scope="col" className="table-secondary">Updated At</th>
               </tr>
             </thead>
             <tbody>
@@ -223,9 +186,7 @@ const SidebarDashboard: React.FC = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} style={{ textAlign: "center" }}>
-                    No data available
-                  </td>
+                  <td colSpan={6} style={{ textAlign: "center" }}>No data available</td>
                 </tr>
               )}
             </tbody>
